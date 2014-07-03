@@ -59,10 +59,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
+  config.vm.provision "file" do |file|
+    file.source = "~/.dockercfg"
+    file.destination = "~/.dockercfg"
+  end
   config.vm.provision "docker" do |docker|
     docker.build_image "/docker-znc",
-      args: "-t znc"
-    docker.run "znc",
+      args: "-t brianhartsock/znc"
+    docker.run "brianhartsock/znc",
       args: "-v /var/znc:/znc -p 6697:6697"
   end
 
