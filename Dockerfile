@@ -6,12 +6,11 @@ RUN apt-get -y install znc
 RUN useradd -s /bin/bash -U znc
 
 VOLUME ["/znc"]
-RUN chown -R znc:znc /znc
-RUN chmod o-rwx /znc
 
 EXPOSE 6667
 EXPOSE 6697
 
-USER znc
+ADD start-znc /usr/local/bin/
+RUN chmod 755 /usr/local/bin/start-znc
 
-CMD ["znc", "-d", "/znc", "-f"]
+CMD /usr/local/bin/start-znc

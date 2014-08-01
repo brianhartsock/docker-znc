@@ -1,0 +1,12 @@
+#!/bin/bash
+# This script will setup the envirionment for ZNC to run. This script REQUIRES
+# root privileges but will run ZNC as an unprivileged user.
+
+# Give ownership of the config to the ZNC user
+chown -R znc:znc /znc
+
+# Make sure directory permissions allow access
+chmod 700 /znc
+
+# Run ZNC as ZNC user
+sudo -u znc znc -d /znc -f
